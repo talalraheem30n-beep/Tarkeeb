@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarkeeb — Scan · Discover · Cook</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <!-- TOP NAVBAR -->
+  <nav class="top-nav" id="topNav">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <img src="./logo.png" alt="Tarkeeb" class="nav-logo-img">
+      </div>
+      <div class="nav-links">
+        <a href="#discover" class="nav-link active" data-page="discover" id="navDiscover">
+          <span class="nav-icon">🧭</span> Discover
+        </a>
+        <a href="#upload" class="nav-link" data-page="upload" id="navUpload">
+          <span class="nav-icon">📸</span> Upload
+        </a>
+        <a href="#about" class="nav-link" data-page="about" id="navAbout">
+          <span class="nav-icon">ℹ️</span> About
+        </a>
+      </div>
+      <div class="nav-user">
+        <span class="nav-username" id="userName">Loading…</span>
+        <button class="btn-logout" id="btnLogout">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══ PAGE: DISCOVER ═══ -->
+  <main class="page active" id="pageDiscover">
+    <div class="page-container">
+      <div class="discover-header">
+        <h1 class="page-title">Discover Recipes</h1>
+        <p class="page-subtitle">Explore popular Pakistani & fast food dishes.</p>
+      </div>
+      
+      <!-- HERO SLIDER -->
+      <div class="hero-slider-section">
+        <h2 class="section-heading" style="font-size: 24px; font-weight: 800; margin-bottom: 16px;">🔥 Top Recipes</h2>
+        <div class="hero-slider" id="heroSlider">
+          <div class="slider-track" id="sliderTrack"></div>
+          <button class="slider-btn prev" id="sliderPrev">❮</button>
+          <button class="slider-btn next" id="sliderNext">❯</button>
+          <div class="slider-dots" id="sliderDots"></div>
+        </div>
+      </div>
+
+      <div class="discover-header" style="margin-top: 48px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
+        <h2 class="section-heading" style="font-size: 22px; font-weight: 800; margin: 0;">🍽️ All Recipes</h2>
+        <div class="category-tabs" style="margin: 0;">
+          <button class="cat-tab active" data-cat="all">All</button>
+          <button class="cat-tab" data-cat="Pakistani">🇵🇰 Pakistani</button>
+          <button class="cat-tab" data-cat="Fast Food">🍔 Fast Food</button>
+        </div>
+      </div>
+      <div class="dish-grid" id="dishGrid">
+        <!-- Dish cards injected by JS -->
+      </div>
+    </div>
+  </main>
+
+  <!-- ═══ PAGE: UPLOAD ═══ -->
+  <main class="page" id="pageUpload">
+    <div class="page-container upload-container">
+      <div class="upload-hero-card">
+        <img src="./logo.png" alt="Tarkeeb" class="upload-logo">
+        <h1 class="page-title">Analyze Your Food</h1>
+        <p class="page-subtitle">Upload a food image named after a dish (e.g. <strong>biryani.jpg</strong>, <strong>burger.png</strong>) and we'll identify it instantly.</p>
+        <div class="dropzone" id="dropzone">
+          <input type="file" id="fileInput" accept="image/*" hidden>
+          <div class="dropzone-content" id="dropzoneContent">
+            <div class="dropzone-icon">⬆️</div>
+            <span class="dropzone-text">Drop image here or <button class="link-btn" id="browseBtn">browse</button></span>
+            <span class="dropzone-hint">PNG, JPG, WEBP — max 10MB</span>
+          </div>
+        </div>
+        <div class="upload-or">— or pick from the menu —</div>
+        <div class="quick-picks" id="quickPicks">
+          <!-- Quick pick buttons injected by JS -->
+        </div>
+      </div>
+    </div>
+    <!-- Analyzing overlay -->
+    <div class="analyzing-overlay" id="analyzingOverlay">
+      <div class="analyzing-card">
+        <div class="analyzing-spinner"></div>
+        <div class="analyzing-title">Analyzing Image…</div>
+        <div class="analyzing-file" id="analyzingFile"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ═══ PAGE: RECIPE DETAIL ═══ -->
+  <main class="page" id="pageRecipe">
+    <div class="page-container">
+      <button class="btn-back" id="btnBack">← Back</button>
+      <div id="recipeContent">
+        <!-- Recipe content injected by JS -->
+      </div>
+    </div>
+  </main>
+
+  <!-- No Match Page -->
+  <main class="page" id="pageNoMatch">
+    <div class="page-container" style="display:flex;align-items:center;justify-content:center;min-height:70vh">
+      <div class="no-match-card">
+        <div class="no-match-icon">🤔</div>
+        <div class="no-match-title">Dish Not Recognized</div>
+        <div class="no-match-text" id="noMatchText"></div>
+        <button class="login-btn" style="max-width:240px;margin:0 auto" id="btnRetry">Try Again</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ═══ PAGE: ABOUT ═══ -->
+  <main class="page" id="pageAbout">
+    <div class="page-container">
+      <div class="about-header" style="text-align: center; margin-bottom: 40px;">
+        <span style="display:inline-block; padding: 6px 16px; background: var(--accent-brand); color: white; border-radius: 20px; font-size: 11px; font-weight: 800; text-transform: uppercase; margin-bottom: 16px; letter-spacing: 0.5px; box-shadow: var(--shadow);">Prototype Version 1.0</span>
+        <h1 class="page-title">About Tarkeeb</h1>
+        <p class="page-subtitle" style="font-size: 18px; margin-top: 8px;">Turning food visuals into structured cooking knowledge.</p>
+      </div>
+
+      <div class="about-grid-new">
+        
+        <!-- Mission & Vision -->
+        <div class="about-card-new full-width highlight-card">
+          <div class="card-content-split">
+            <div class="split-side">
+              <h3>🎯 Our Mission</h3>
+              <p>To eliminate <strong>"Save Fatigue"</strong> by transforming visual food content into structured, actionable kitchen intelligence—helping users instantly understand, recreate, and benefit from any dish they see.</p>
+            </div>
+            <div class="split-divider"></div>
+            <div class="split-side">
+              <h3>👁️ Our Vision</h3>
+              <p>To become the world’s most intuitive <strong>food intelligence platform</strong>—where anyone can understand any dish, anywhere, instantly.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Problem & Solution -->
+        <div class="about-card-new">
+          <h3>🚨 The Problem We Solve</h3>
+          <p>Every day, millions of users:</p>
+          <ul class="styled-list mt-10">
+            <li>Save recipes from social media</li>
+            <li>Forget to revisit them</li>
+            <li>Lack clear, structured cooking instructions</li>
+          </ul>
+          <p class="mt-10">This creates <strong>"Save Fatigue"</strong>—a frustrating gap between inspiration and execution.</p>
+        </div>
+
+        <div class="about-card-new">
+          <h3>💡 Our Solution</h3>
+          <p>Tarkeeb bridges this gap by allowing users to:</p>
+          <ul class="styled-list mt-10">
+            <li>📸 <strong>Scan</strong> food images</li>
+            <li>🧠 <strong>Identify</strong> dishes instantly</li>
+            <li>🍳 <strong>Get</strong> structured recipes</li>
+            <li>📊 <strong>Access</strong> ingredient & cooking insights</li>
+          </ul>
+          <p class="mt-10">All in one seamless experience.</p>
+        </div>
+
+        <!-- How It Works & Key Features -->
+        <div class="about-card-new">
+          <h3>⚙️ How Tarkeeb Works</h3>
+          <ol class="styled-steps mt-10">
+            <li><strong>Upload</strong> or capture a food image</li>
+            <li>The system analyzes <strong>visual patterns</strong></li>
+            <li>Identifies the closest <strong>matching dish</strong></li>
+            <li>Generates ingredients, steps, and cooking details</li>
+          </ol>
+          <div class="pro-tip mt-10">👉 <em>In the full version, this will be powered by AI models like Google AI Studio.</em></div>
+        </div>
+
+        <div class="about-card-new">
+          <h3>✨ Key Features</h3>
+          <div class="tags-container mt-10">
+            <span class="feature-tag">📷 Image Recognition</span>
+            <span class="feature-tag">🍽️ Instant Recipes</span>
+            <span class="feature-tag">🧂 Ingredient Breakdown</span>
+            <span class="feature-tag">⏱️ Cooking Time & Difficulty</span>
+            <span class="feature-tag planned">📊 Nutrition Insights (Planned)</span>
+            <span class="feature-tag planned">💾 Save & Revisit (Planned)</span>
+          </div>
+        </div>
+
+        <!-- Target Users & Market -->
+        <div class="about-card-new">
+          <h3>🎯 Who Is This For?</h3>
+          <ul class="styled-list mt-10">
+            <li>👨‍🎓 <strong>Students</strong> learning to cook</li>
+            <li>🌍 <strong>Travelers</strong> exploring new cuisines</li>
+            <li>🏠 <strong>Home cooks</strong> seeking convenience</li>
+            <li>📱 <strong>Social media users</strong> overwhelmed by saved recipes</li>
+          </ul>
+        </div>
+
+        <div class="about-card-new">
+          <h3>📈 Market Opportunity</h3>
+          <p>With the rise of food content on Instagram and TikTok, millions engage with recipes daily but lack tools to convert inspiration into action.</p>
+          <p class="mt-10">Tarkeeb sits at the intersection of:</p>
+          <div class="tags-container mt-10">
+            <span class="feature-tag blue">Food Tech</span>
+            <span class="feature-tag blue">Artificial Intelligence</span>
+            <span class="feature-tag blue">Consumer Convenience</span>
+          </div>
+        </div>
+
+        <!-- Demo vs Future -->
+        <div class="about-card-new full-width">
+          <div class="card-content-split">
+            <div class="split-side">
+              <h3>🔍 About This Demo</h3>
+              <p>This prototype demonstrates the core UX of Tarkeeb.</p>
+              <ul class="styled-list mt-10">
+                <li>Uses a curated dataset of popular dishes</li>
+                <li>Simulates AI-based recognition</li>
+                <li>Focuses on UI/UX and interaction flow</li>
+              </ul>
+              <div class="pro-tip mt-10">👉 <em>Production will support real-time image recognition & dynamic generation.</em></div>
+            </div>
+            <div class="split-divider"></div>
+            <div class="split-side">
+              <h3>🚀 Future Roadmap</h3>
+              <ul class="styled-list mt-10">
+                <li>✅ Real-time AI food recognition</li>
+                <li>📊 Nutrition and calorie tracking</li>
+                <li>🛒 Ingredient shopping integration</li>
+                <li>🎯 Personalized recipe recommendations</li>
+                <li>🌐 Multi-language support</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="about-card-new cta-card full-width" style="text-align:center; padding: 48px 32px;">
+          <h2 style="font-size: 28px; margin-bottom: 12px; font-weight: 800; color: var(--text-primary);">Join the Future of Cooking</h2>
+          <p style="font-size: 16px; max-width: 600px; margin: 0 auto;">Tarkeeb means method or composition. We are reimagining how people interact with food.</p>
+          <div class="cta-tagline mt-10" style="font-size: 24px; font-weight: 800; color: var(--accent-brand); margin-top: 24px; display: inline-block; padding: 12px 24px; background: white; border-radius: 30px; box-shadow: var(--shadow);">👉 Scan. Discover. Cook.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
